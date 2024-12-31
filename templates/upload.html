@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceMorph</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>FaceMorph</h1>
+    </header>
+    <div class="container">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*">
+            <button type="submit">Upload and Transform</button>
+        </form>
+
+        {% if message %}
+        <p style="color: #ff4d4d; font-weight: bold;">{{ message }}</p>
+        {% endif %}
+
+        {% if original_image and transformed_image %}
+        <div class="images">
+            <div>
+                <h3>Original Image</h3>
+                <img src="{{ url_for('static', filename='uploads/' + original_image) }}" alt="Original Image">
+            </div>
+            <div>
+                <h3>Transformed Image</h3>
+                <img src="{{ url_for('static', filename='results/' + transformed_image) }}" alt="Transformed Image">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
